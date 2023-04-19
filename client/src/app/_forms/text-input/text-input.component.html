@@ -1,0 +1,26 @@
+<div class="mb-3" style="height: 100%;">
+    <input type={{type}} 
+      [class.is-invalid]="control.touched && control.invalid"
+      class="custom-form-control" 
+      [formControl]="control"
+      placeholder={{label}}
+    >
+    <!-- I HAVE NO IDEA WHY BUT THIS BREAKS THE VALIDATION  -->
+    <!-- <div class="invalidation-feedback pt-2 text-center text-danger" *ngIf="control.errors?.['required']">
+        Please enter a {{label}} <br/>
+    </div> -->
+    <div class="invalidation-feedback text-danger" *ngIf="control.errors?.['minlength']">
+        {{label}} must be atleast {{control.errors?.['minlength'].requiredLength}} characters
+    </div>
+    <div class="invalidation-feedback text-danger" *ngIf="control.errors?.['maxlength']">
+        {{label}} must be most {{control.errors?.['maxlength'].requiredLength}} characters
+    </div>
+    <div class="invalidation-feedback pt-2 text-center text-danger" *ngIf="control.errors?.['notMatching']" >
+        Passwords do not match
+    </div>
+    
+</div>
+
+
+
+

@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <!-- Navbar Container -->
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/" style="color: #a0ea00;">DeathCareJobs</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0" >   
+          <ng-container *ngIf="accountService.currentUser$ | async">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" routerLink="/members" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">members</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/lists" routerLinkActive="active">lists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/messages" routerLinkActive="active">messages</a>
+            </li>
+          </ng-container>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/errors" routerLinkActive="active">errors</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/checkout" routerLinkActive="active">Stripe</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/jobpost" routerLinkActive="active">Post a Job</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/jobdetail" routerLinkActive="active">Job Detail</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/jobedit" routerLinkActive="active">Job Edit</a>
+          </li>
+          <li *appHasRole="['Admin', 'Moderator']" class="nav-item">
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin Panel</a>
+          </li>
+        </ul>
+
+        <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+          <img class="rounded-circle me-2" src="{{user.photoUrl || './assets/user.png'}}" alt="user photo"/>
+          <a href="" class="dropdown-toggle text-light me-5" style="padding-right: 10px;" dropdownToggle (click)="false">{{user.knownAs}}</a>
+          <div class="dropdown-menu mt-3" *dropdownMenu>
+            <a routerLink="/member/edit" href="" class="dropdown-item" (click)="false">Edit Profile</a>
+            <div class="dropdowndivider"></div>
+            <a href="" class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
+        </div>
+
+        <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" class="d-flex" role="search" (ngSubmit)="login()">
+          <input class="form-control me-2" type="username" placeholder="Username" aria-label="Username" name="username" [(ngModel)]="model.username">
+          <input class="form-control me-2" type="password" placeholder="Password" aria-label="Password" name="password" [(ngModel)]="model.password">
+          <button class="btn btn-outline-success" type="submit">login</button>
+        </form>
+      </div>
+    </div>
+  </nav>

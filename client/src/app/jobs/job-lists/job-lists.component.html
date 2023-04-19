@@ -1,0 +1,26 @@
+<div class="text-center mt-3">
+    <h2> Listings Found - {{pagination?.totalItems}} found</h2>
+
+</div>
+
+<div class="row">
+    <div class="" *ngFor="let job of jobs">
+        <app-job-card [job]="job"></app-job-card> 
+    </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination 
+    [boundaryLinks]="true" 
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [maxSize]="10"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;" 
+    nextText="&rsaquo;" 
+    firstText="&laquo;" 
+    lastText="&raquo;">
+ 
+</pagination>
+</div>

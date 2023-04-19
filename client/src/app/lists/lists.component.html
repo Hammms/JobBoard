@@ -1,0 +1,35 @@
+<div class="text-center mt-3">
+    <h2>{{predicate === 'saved' ? 'Members i Saved' : "Members who saved me "}} </h2>
+
+    <div class="contianer mt-3">
+        <div class="d-flex">
+            <div class="btn-group" name="predicate">
+                <button class="btn btn-primay" btnRadio="saved" [(ngModel)]="predicate"
+                (click)="loadSaves()">Members you have saved</button>
+            
+                <button class="btn btn-primay" btnRadio="savedBy" [(ngModel)]="predicate"
+                (click)="loadSaves()">Members that have saved you</button>
+            </div>
+        </div>
+
+    <div class="row mt-3">
+        <div class="col-2" *ngFor="let member of members">
+            <app-member-card [member] = "member"></app-member-card>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination 
+    [boundaryLinks]="true" 
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [maxSize]="10"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;" 
+    nextText="&rsaquo;" 
+    firstText="&laquo;" 
+    lastText="&raquo;">
+</pagination>
+</div>
+</div>

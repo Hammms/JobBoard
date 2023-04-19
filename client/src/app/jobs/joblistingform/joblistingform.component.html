@@ -1,0 +1,80 @@
+<form [formGroup]="jobForm" (ngSubmit)="jobForm.valid " autocomplete="off">
+    <h2 class="text-center text-primary">Canidates are one form away! </h2>
+    
+    <div>Company Name</div>
+    <app-text-input [formControl]="$any(jobForm.controls['CompanyName'])" [label]="'CompanyName'"></app-text-input>
+    <div>Company Image</div>
+    <div class="col-md-3 mt-2 mb-2">
+      <input type="file" ng2FileSelect [uploader]="uploader" [formControl]="$any(jobForm.controls['ListingImage'])" />
+    </div>
+    <div>Job Title</div>
+    <app-text-input [formControl]="$any(jobForm.controls['JobTitle'])" [label]="'Job Title'"></app-text-input> 
+    <div>Location</div>
+    <app-text-input [formControl]="$any(jobForm.controls['Location'])" [label]="'Job Location'"></app-text-input>
+    <div>Job Type</div>
+    <app-text-input [formControl]="$any(jobForm.controls['JobType'])" [label]="'JobType'"></app-text-input>
+    <div>Description</div>
+    <textarea [formControl]="$any(jobForm.controls['Description'])" class="textarea custom-form-control" placeholder="Description" style="height: 400px; display: block;" ></textarea> 
+    <div>Qualifications</div>
+    <textarea [formControl]="$any(jobForm.controls['Qualifications'])" class="textarea custom-form-control" placeholder="Qualifications" style="height: 400px; display: block;"></textarea>
+    
+    <div class="row" *ngIf="validationErrors" class="text-danger">
+      <ul class="text-danger">
+        <li *ngFor="let error of validationErrors">
+          {{error}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-group text-center">
+        <button [disabled]="!jobForm.valid" class="btn btn-outline-primary mr-2 mt-2 mb-2" type="submit" (click)="submit()">Submit</button>
+        <button class="btn btn-outline-primary mr-2 mt-2 mb-2" type="submit" >cancel</button>
+    </div>
+
+</form>
+
+<!-- <p>form value: {{registerForm.value | json }}</p>
+<p>form status: {{registerForm.status | json }}</p>  -->
+
+
+<!-- Form inputs 
+    <div class="mb-3">
+        <input type="text" 
+          [class.is-invalid]="registerForm.get('username')?.errors && registerForm.get('username')?.touched"
+          class="form-control" 
+          formControlName="username"
+          placeholder="Username">
+          <div class="invalidation-feedback pt-2 text-center text-danger" *ngIf="registerForm.get('username')?.hasError('required')" >Please enter a username</div>
+          <div class="invalidation-feedback text-danger" *ngIf="registerForm.get('password')?.hasError('minlength')" >Required min length of X</div>
+          <div class="invalidation-feedback text-danger" *ngIf="registerForm.get('password')?.hasError('maxlength')" >Required max length of X</div>
+    </div>
+    <div class="mb-3">
+      <input type="text" 
+        [class.is-invalid]="registerForm.get('email')?.errors && registerForm.get('email')?.touched"
+        class="form-control" 
+        formControlName="email"
+        placeholder="Email Placeholder leave blank">
+  </div>
+    <div class="mb-3">
+        <input type="text" 
+        [class.is-invalid]="registerForm.get('password')?.errors && registerForm.get('password')?.touched"
+          class="form-control" 
+          formControlName="password"
+          placeholder="Password">
+    </div>
+    <div class="mb-3">
+      <input type="text"
+      [class.is-invalid]="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched" 
+        class="form-control" 
+        formControlName="confirmPassword"
+        placeholder="Confirm Password">
+  </div>
+-->
+
+
+    <!-- Validators 
+    <div class="invalidation-feedback pt-2 text-center text-danger" *ngIf="registerForm.get('username')?.hasError('required')" >Please enter a username</div>
+    <div class="invalidation-feedback pt-2 text-center text-danger" *ngIf="registerForm.get('password')?.hasError('required')" >Please enter a password.</div>
+    <div class="invalidation-feedback text-danger" *ngIf="registerForm.get('password')?.hasError('minlength')" >Required min length of X</div>
+    <div class="invalidation-feedback text-danger" *ngIf="registerForm.get('password')?.hasError('maxlength')" >Required max length of X</div>
+    -->
